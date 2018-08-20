@@ -80,11 +80,13 @@ $this->title = 'My Yii Application';
         $(document).on('beforeSubmit', '#ajax-country', function (e) {
             $.post(form.attr('action'), form.serialize(), function (response) {
                 if (response.success) {
-                    var result = $('#result').html(response.data);
+                    var result = $('#result');
                     if (response.limit) {
-                         result.parent().removeClass('success').addClass('danger');
+                       result.html(response.data);
+                       result.parent().removeClass('success').addClass('danger');
                     } else {
-                         result.parent().removeClass('danger').addClass('success'); 
+                       result.html(response.data.country + ' - ' + response.data.city);
+                       result.parent().removeClass('danger').addClass('success'); 
                     }         
                 }
             });
